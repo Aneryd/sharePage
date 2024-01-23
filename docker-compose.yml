@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    image: nginx:alpine
+    ports:
+      - 80:80
+    depends_on:
+      - fpm
+    volumes:
+      - ./:/var/www/sharePage
+  fpm: 
+    build: 
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - ./:/var/www/sharePage
+    working_dir: /var/www/sharePage
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: share_page
+      MYSQL_ROOT_PASSWORD: password
+volumes:
+  mysql:
