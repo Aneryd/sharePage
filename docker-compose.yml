@@ -5,23 +5,26 @@ services:
     build: 
       context: .
       dockerfile: docker/Nginx.Dockerfile
-    image: nginx:alpine
+    # image: nginx:alpine
     ports:
       - 80:80
-    depends_on:
+    links:
       - fpm
     volumes:
       - ./:/var/www/sharePage
+    depends_on:
+      - mysql
+      - fpm
   fpm: 
     build: 
       context: .
       dockerfile: docker/Fpm.Dockerfile
-    ports:
-      - 9000:9000
+    # ports:
+    #   - 9000:9000
     volumes:
       - ./:/var/www/sharePage
-    working_dir: /var/www/sharePage
-    depends_on:
+    # working_dir: /var/www/sharePage
+    links:
       - mysql
   mysql:
     image: mysql:latest

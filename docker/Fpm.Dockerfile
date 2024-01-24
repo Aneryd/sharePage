@@ -11,4 +11,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
+WORKDIR /var/www/sharePage
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

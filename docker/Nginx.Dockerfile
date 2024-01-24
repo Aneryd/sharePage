@@ -1,5 +1,3 @@
-FROM nginx:alpine
-
-ADD docker/conf/nginx.conf /etc/nginx/conf.d/default.conf
-
+FROM nginx
+ADD docker/conf.d/nginx.conf /etc/nginx/conf.d/default.conf
 WORKDIR /var/www/sharePage
