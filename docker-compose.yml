@@ -19,8 +19,8 @@ services:
     build: 
       context: .
       dockerfile: docker/Fpm.Dockerfile
-    # ports:
-    #   - 9000:9000
+    ports:
+      - 9000:9000
     volumes:
       - ./:/var/www/sharePage
     # working_dir: /var/www/sharePage
